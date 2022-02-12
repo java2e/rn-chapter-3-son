@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 import * as Font from 'expo-font';
@@ -14,13 +14,15 @@ import ShopNavigator from './navigation/ShopNavigator';
 import { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 
+import ReduxThunk from 'redux-thunk';
+
 const rootReducer = combineReducers({
   products: productReducer,
   cart:cartReducer,
   orders:orderReducer
 })
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer,applyMiddleware(ReduxThunk));
 
 const fetchFonts =()=> {
   return Font.loadAsync({

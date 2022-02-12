@@ -12,6 +12,8 @@ import CardScreen from "../screens/shop/CardScreen";
 import { Ionicons } from "@expo/vector-icons";
 import OrderScreen from "../screens/shop/OrderScreen";
 import { createDrawerNavigator } from "react-navigation-drawer";
+import UserProductScreen from "../screens/user/UserProductsScreen";
+import EditProductScreen from "../screens/user/EditProductScreen";
 
 
 const defaulNavOptions = {
@@ -35,46 +37,66 @@ const ProductsNavigator = createStackNavigator({
 },
     {
 
-       navigationOptions: {
-           drawerIcon : drawerConfig => (
-               <Ionicons 
+        navigationOptions: {
+            drawerIcon: drawerConfig => (
+                <Ionicons
                     name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                     size={23}
                     color={drawerConfig.tintColor}
-               />
-           )
-       },
-       defaultNavigationOptions: defaulNavOptions
+                />
+            )
+        },
+        defaultNavigationOptions: defaulNavOptions
     }
 )
 
 const OrdersNavigator = createStackNavigator(
     {
-        Orders : OrderScreen
+        Orders: OrderScreen
     },
     {
-    navigationOptions: {
-        drawerIcon : drawerConfig => (
-            <Ionicons 
-                 name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                 size={23}
-                 color={drawerConfig.tintColor}
-            />
-        )
+        navigationOptions: {
+            drawerIcon: drawerConfig => (
+                <Ionicons
+                    name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                    size={23}
+                    color={drawerConfig.tintColor}
+                />
+            )
+        },
+        defaultNavigationOptions: defaulNavOptions
+    }
+)
+
+const AdminNavigator = createStackNavigator(
+    {
+        UserProducts: UserProductScreen,
+        EditProduct: EditProductScreen
     },
-    defaultNavigationOptions: defaulNavOptions
- }
+    {
+        navigationOptions: {
+            drawerIcon: drawerConfig => (
+                <Ionicons
+                    name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+                    size={23}
+                    color={drawerConfig.tintColor}
+                />
+            )
+        },
+        defaultNavigationOptions: defaulNavOptions
+    }
 )
 
 
 const ShopNavigator = createDrawerNavigator(
     {
         Products: ProductsNavigator,
-        Orders : OrdersNavigator
+        Orders: OrdersNavigator,
+        Admin: AdminNavigator
     },
     {
-        contentOptions : {
-            activeTintColor : 'red'
+        contentOptions: {
+            activeTintColor: 'red'
         }
     }
 )
